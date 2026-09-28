@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Record Telemetry</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<p class="eyebrow">Sensor Data</p><h1 class="page-heading">Record Telemetry</h1><p class="subtitle">The application calculates thermal energy automatically and updates the selected tank temperature.</p>
+<div class="form-card"><form action="/telemetry/save" method="post"><div class="form-grid">
+<div class="field"><label>Thermal Tank</label><select name="tankId" required><option value="">Select tank</option><option th:each="t:${tanks}" th:value="${t.id}" th:text="${t.id + ' - ' + t.tankCode + ' (' + t.zone + ')'}"></option></select></div>
+<div class="field"><label>Inlet Temperature °C</label><input type="number" step="0.01" name="inletTemperatureC" required placeholder="45"></div>
+<div class="field"><label>Outlet Temperature °C</label><input type="number" step="0.01" name="outletTemperatureC" required placeholder="60"></div>
+<div class="field"><label>Water Volume (Litres)</label><input type="number" step="0.01" name="waterVolumeLiters" required placeholder="10000"></div>
+</div><div class="form-actions"><button class="btn btn-primary" type="submit">Calculate &amp; Save</button><a class="btn btn-light" href="/telemetry">Cancel</a></div></form></div></div></body></html>

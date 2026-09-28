@@ -1,0 +1,33 @@
+SMART GREENHOUSE ENERGY - DATABASE SETUP
+
+1. Install MySQL 8+ on your Mac.
+2. Start MySQL.
+3. Open src/main/resources/application.properties.
+4. Set spring.datasource.username and spring.datasource.password.
+5. Database name:
+   greenhouse_energy_db
+6. The JDBC URL contains createDatabaseIfNotExist=true.
+7. Run:
+   ./mvnw spring-boot:run
+8. Open:
+   http://localhost:8080
+
+Hibernate will create/update tables automatically because:
+spring.jpa.hibernate.ddl-auto=update
+
+The application contains:
+- Contact Master
+- Product Master
+- Thermal Storage Tank Master
+- Temperature Telemetry
+- Purchase Orders
+- Vendor Bills
+- Sales Orders
+- Customer Invoices
+- Payments
+- Budgets
+- Journal Entries
+- Dashboard
+- P&L
+- Balance Sheet
+- Zone Budget Report

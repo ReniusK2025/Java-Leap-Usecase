@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vendor Bills</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Procure to Pay</p><h1 class="page-heading">Vendor Bills</h1><p class="subtitle">Convert maintenance and pump purchases into supplier bills.</p></div><a class="btn btn-primary" href="/vendor-bills/new">＋ New Vendor Bill</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>PO</th><th>Vendor</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead><tbody>
+<tr th:each="x:${vendorBills}"><td th:text="${x.id}"></td><td th:text="${x.purchaseOrderId}"></td><td th:text="${x.vendorId}"></td><td class="price" th:text="'₹' + ${x.amount}"></td><td th:text="${x.billDate}"></td><td><span class="badge" th:classappend="${x.status == 'PAID' ? ' badge-yes' : ' badge-warn'}" th:text="${x.status}"></span></td></tr>
+<tr th:if="${#lists.isEmpty(vendorBills)}"><td colspan="6" class="empty">No vendor bills yet.</td></tr></tbody></table></div></div></div></body></html>

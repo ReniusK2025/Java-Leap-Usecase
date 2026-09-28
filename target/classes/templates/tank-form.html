@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title th:text="${pageTitle}">Tank</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<p class="eyebrow">Thermal Storage</p><h1 class="page-heading" th:text="${pageTitle}">Tank</h1><p class="subtitle">Define the tank capacity, zone, temperature targets and efficiency.</p>
+<div class="form-card"><form th:action="${tank.id == null ? '/tanks/save' : '/tanks/update/' + tank.id}" method="post">
+<div class="form-grid">
+<div class="field"><label>Tank Code</label><input name="tankCode" th:value="${tank.tankCode}" required placeholder="TANK-Z3-002"></div>
+<div class="field"><label>Greenhouse Zone</label><input name="zone" th:value="${tank.zone}" required placeholder="Thermal Storage Zone 3"></div>
+<div class="field"><label>Capacity (Litres)</label><input type="number" step="0.01" name="capacityLiters" th:value="${tank.capacityLiters}" required></div>
+<div class="field"><label>Current Temperature °C</label><input type="number" step="0.01" name="currentTemperatureC" th:value="${tank.currentTemperatureC}" required></div>
+<div class="field"><label>Target Temperature °C</label><input type="number" step="0.01" name="targetTemperatureC" th:value="${tank.targetTemperatureC}" required></div>
+<div class="field"><label>Efficiency %</label><input type="number" step="0.01" name="efficiencyPercent" th:value="${tank.efficiencyPercent}" required></div>
+<div class="field check-field"><label><input type="checkbox" name="active" value="true" th:checked="${tank.active == null || tank.active}"> Active</label></div>
+</div><div class="form-actions"><button class="btn btn-primary" type="submit">Save Tank</button><a class="btn btn-light" href="/tanks">Cancel</a></div>
+</form></div></div></body></html>

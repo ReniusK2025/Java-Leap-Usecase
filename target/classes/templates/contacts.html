@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Contacts</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Master Data</p><h1 class="page-heading">Contacts</h1><p class="subtitle">Manage greenhouse growers and thermal equipment vendors.</p></div><a class="btn btn-primary" href="/contacts/new">＋ Add Contact</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Email</th><th>Phone</th><th>Address</th><th>Actions</th></tr></thead><tbody>
+<tr th:each="c:${contacts}"><td th:text="${c.id}"></td><td class="food-name" th:text="${c.name}"></td><td><span class="badge badge-info" th:text="${c.type}"></span></td><td th:text="${c.email}"></td><td th:text="${c.phone}"></td><td th:text="${c.address}"></td><td class="actions"><a class="btn btn-small btn-light" th:href="@{'/contacts/edit/' + ${c.id}}">Edit</a><form th:action="@{'/contacts/delete/' + ${c.id}}" method="post" onsubmit="return confirm('Delete this contact?');"><button class="btn btn-small btn-danger" type="submit">Delete</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(contacts)}"><td colspan="7" class="empty">No contacts yet.</td></tr></tbody></table></div></div></div></body></html>

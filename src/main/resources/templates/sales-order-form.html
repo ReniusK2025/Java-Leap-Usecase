@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title th:text="${pageTitle}">Sales Order</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<p class="eyebrow">Order to Cash</p><h1 class="page-heading" th:text="${pageTitle}">Sales Order</h1><p class="subtitle">Enter thermal energy delivered and the rate per kWh. Total is calculated automatically.</p>
+<div class="form-card"><form th:action="${salesOrder.id == null ? '/sales-orders/save' : '/sales-orders/update/' + salesOrder.id}" method="post"><div class="form-grid">
+<div class="field"><label>Grower</label><select name="growerId" required><option value="">Select grower</option><option th:each="g:${growers}" th:if="${g.type == 'GROWER'}" th:value="${g.id}" th:text="${g.id + ' - ' + g.name}" th:selected="${salesOrder.growerId == g.id}"></option></select></div>
+<div class="field"><label>Heating Product</label><select name="productId" required><option value="">Select service</option><option th:each="p:${products}" th:if="${p.type == 'SERVICE'}" th:value="${p.id}" th:text="${p.id + ' - ' + p.name}" th:selected="${salesOrder.productId == p.id}"></option></select></div>
+<div class="field"><label>Energy Delivered (kWh)</label><input type="number" step="0.01" name="energyKwh" th:value="${salesOrder.energyKwh}" required></div>
+<div class="field"><label>Rate per kWh (₹)</label><input type="number" step="0.01" name="unitPrice" th:value="${salesOrder.unitPrice}" required></div>
+<div class="field"><label>Zone</label><input name="zone" th:value="${salesOrder.zone}" required placeholder="Thermal Storage Zone 3"></div>
+<div class="field" th:if="${salesOrder.id != null}"><label>Status</label><select name="status"><option th:selected="${salesOrder.status == 'CONFIRMED'}">CONFIRMED</option><option th:selected="${salesOrder.status == 'COMPLETED'}">COMPLETED</option><option th:selected="${salesOrder.status == 'CANCELLED'}">CANCELLED</option></select></div>
+</div><div class="form-actions"><button class="btn btn-primary" type="submit">Save Sales Order</button><a class="btn btn-light" href="/sales-orders">Cancel</a></div></form></div></div></body></html>

@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Products</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Master Data</p><h1 class="page-heading">Products & Services</h1><p class="subtitle">Manage thermal heating services, repairs and pump assemblies.</p></div><a class="btn btn-primary" href="/products/new">＋ Add Product</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Unit</th><th>Unit Price</th><th>Actions</th></tr></thead><tbody>
+<tr th:each="p:${products}"><td th:text="${p.id}"></td><td class="food-name" th:text="${p.name}"></td><td th:text="${p.type}"></td><td th:text="${p.unit}"></td><td th:text="'₹' + ${p.unitPrice}"></td><td class="actions"><a class="btn btn-small btn-light" th:href="@{'/products/edit/' + ${p.id}}">Edit</a><form th:action="@{'/products/delete/' + ${p.id}}" method="post" onsubmit="return confirm('Delete this product?');"><button class="btn btn-small btn-danger" type="submit">Delete</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(products)}"><td colspan="6" class="empty">No products yet.</td></tr></tbody></table></div></div></div></body></html>

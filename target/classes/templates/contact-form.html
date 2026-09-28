@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title th:text="${pageTitle}">Contact</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<p class="eyebrow">Master Data</p><h1 class="page-heading" th:text="${pageTitle}">Contact</h1><p class="subtitle">Register a greenhouse grower or thermal equipment vendor.</p>
+<div class="form-card"><form th:action="${contact.id == null ? '/contacts/save' : '/contacts/update/' + contact.id}" method="post"><div class="form-grid">
+<div class="field"><label>Name</label><input name="name" th:value="${contact.name}" required placeholder="Green Valley Growers"></div>
+<div class="field"><label>Type</label><select name="type" required><option value="">Select type</option><option value="GROWER" th:selected="${contact.type == 'GROWER'}">GROWER</option><option value="VENDOR" th:selected="${contact.type == 'VENDOR'}">VENDOR</option></select></div>
+<div class="field"><label>Email</label><input type="email" name="email" th:value="${contact.email}" placeholder="accounts@example.com"></div>
+<div class="field"><label>Phone</label><input name="phone" th:value="${contact.phone}"></div>
+<div class="field field-full"><label>Address / Zone</label><input name="address" th:value="${contact.address}"></div>
+</div><div class="form-actions"><button class="btn btn-primary" type="submit">Save Contact</button><a class="btn btn-light" href="/contacts">Cancel</a></div></form></div></div></body></html>

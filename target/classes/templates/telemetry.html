@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Telemetry</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Sensor Data</p><h1 class="page-heading">Temperature Telemetry</h1><p class="subtitle">Record water temperatures and let the system calculate gross and net thermal energy.</p></div><a class="btn btn-primary" href="/telemetry/new">＋ Record Telemetry</a></div>
+<div class="info-banner">Calculation: <b>kWh = litres × 4.186 × |outlet − inlet| ÷ 3600</b>, then tank efficiency is applied.</div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>Time</th><th>Tank</th><th>Zone</th><th>Inlet °C</th><th>Outlet °C</th><th>Delta °C</th><th>Volume L</th><th>Gross kWh</th><th>Net kWh</th><th>Action</th></tr></thead><tbody>
+<tr th:each="x:${telemetry}"><td th:text="${x.recordedAt}"></td><td th:text="${x.tankId}"></td><td th:text="${x.zone}"></td><td th:text="${x.inletTemperatureC}"></td><td th:text="${x.outletTemperatureC}"></td><td th:text="${x.deltaTemperatureC}"></td><td th:text="${x.waterVolumeLiters}"></td><td th:text="${x.grossEnergyKwh}"></td><td class="price" th:text="${x.netHeatDeliveredKwh}"></td><td><form th:action="@{'/telemetry/delete/' + ${x.id}}" method="post" onsubmit="return confirm('Delete this telemetry record?');"><button class="btn btn-small btn-danger">Delete</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(telemetry)}"><td colspan="10" class="empty">No telemetry records yet.</td></tr></tbody></table></div></div></div></body></html>

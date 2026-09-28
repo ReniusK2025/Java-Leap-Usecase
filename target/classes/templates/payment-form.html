@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Record Payment</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<p class="eyebrow">Bank</p><h1 class="page-heading">Record Payment</h1><p class="subtitle">Customer payments settle invoices; vendor payments settle bills.</p>
+<div class="form-card"><form action="/payments/save" method="post"><div class="form-grid">
+<div class="field"><label>Payment Type</label><select name="paymentType" required><option value="">Select type</option><option value="CUSTOMER">CUSTOMER RECEIPT</option><option value="VENDOR">VENDOR PAYMENT</option></select></div>
+<div class="field"><label>Reference ID</label><input type="number" name="referenceId" required placeholder="Invoice or Bill ID"></div>
+<div class="field"><label>Amount (₹)</label><input type="number" step="0.01" name="amount" required></div>
+<div class="field"><label>Method</label><select name="method" required><option value="BANK_TRANSFER">BANK TRANSFER</option><option value="CASH">CASH</option></select></div>
+</div><div class="form-actions"><button class="btn btn-primary" type="submit">Record Payment</button><a class="btn btn-light" href="/payments">Cancel</a></div></form></div></div></body></html>

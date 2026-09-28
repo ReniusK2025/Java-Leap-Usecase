@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Purchase Orders</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Procure to Pay</p><h1 class="page-heading">Purchase Orders</h1><p class="subtitle">Order replacement pumps and maintenance goods from vendors.</p></div><a class="btn btn-primary" href="/purchase-orders/new">＋ New Purchase Order</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Vendor ID</th><th>Product ID</th><th>Qty</th><th>Unit Price</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+<tr th:each="x:${purchaseOrders}"><td th:text="${x.id}"></td><td th:text="${x.vendorId}"></td><td th:text="${x.productId}"></td><td th:text="${x.quantity}"></td><td th:text="'₹' + ${x.unitPrice}"></td><td class="price" th:text="'₹' + ${x.totalAmount}"></td><td><span class="badge badge-info" th:text="${x.status}"></span></td><td class="actions"><a class="btn btn-small btn-light" th:href="@{'/purchase-orders/edit/' + ${x.id}}">Edit</a><form th:action="@{'/purchase-orders/delete/' + ${x.id}}" method="post" onsubmit="return confirm('Delete this purchase order?');"><button class="btn btn-small btn-danger">Delete</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(purchaseOrders)}"><td colspan="8" class="empty">No purchase orders yet.</td></tr></tbody></table></div></div></div></body></html>

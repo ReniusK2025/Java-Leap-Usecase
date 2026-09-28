@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title th:text="${pageTitle}">Product</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<p class="eyebrow">Master Data</p><h1 class="page-heading" th:text="${pageTitle}">Product</h1><p class="subtitle">Create a service or goods item used in thermal energy transactions.</p>
+<div class="form-card"><form th:action="${product.id == null ? '/products/save' : '/products/update/' + product.id}" method="post"><div class="form-grid">
+<div class="field field-full"><label>Name</label><input name="name" th:value="${product.name}" required placeholder="Greenhouse Thermal Heating kWh"></div>
+<div class="field"><label>Type</label><select name="type" required><option value="">Select type</option><option value="SERVICE" th:selected="${product.type == 'SERVICE'}">SERVICE</option><option value="GOODS" th:selected="${product.type == 'GOODS'}">GOODS</option></select></div>
+<div class="field"><label>Unit</label><input name="unit" th:value="${product.unit}" required placeholder="kWh / JOB / UNIT"></div>
+<div class="field"><label>Unit Price (₹)</label><input type="number" step="0.01" name="unitPrice" th:value="${product.unitPrice}" required></div>
+</div><div class="form-actions"><button class="btn btn-primary" type="submit">Save Product</button><a class="btn btn-light" href="/products">Cancel</a></div></form></div></div></body></html>

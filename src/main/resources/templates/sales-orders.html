@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sales Orders</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Order to Cash</p><h1 class="page-heading">Thermal Heating Sales Orders</h1><p class="subtitle">Bill growers based on thermal energy delivered in kWh.</p></div><a class="btn btn-primary" href="/sales-orders/new">＋ New Sales Order</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Grower</th><th>Energy kWh</th><th>Rate</th><th>Total</th><th>Zone</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+<tr th:each="x:${salesOrders}"><td th:text="${x.id}"></td><td th:text="${x.growerId}"></td><td th:text="${x.energyKwh}"></td><td th:text="'₹' + ${x.unitPrice}"></td><td class="price" th:text="'₹' + ${x.totalAmount}"></td><td th:text="${x.zone}"></td><td><span class="badge badge-info" th:text="${x.status}"></span></td><td class="actions"><a class="btn btn-small btn-light" th:href="@{'/sales-orders/edit/' + ${x.id}}">Edit</a><form th:action="@{'/sales-orders/delete/' + ${x.id}}" method="post" onsubmit="return confirm('Delete this sales order?');"><button class="btn btn-small btn-danger">Delete</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(salesOrders)}"><td colspan="8" class="empty">No sales orders yet.</td></tr></tbody></table></div></div></div></body></html>

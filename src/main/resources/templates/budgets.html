@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Budgets</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Planning</p><h1 class="page-heading">Zone Budgets</h1><p class="subtitle">Set seasonal heating revenue and operating cost budgets.</p></div><a class="btn btn-primary" href="/budgets/new">＋ Add Budget</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Zone</th><th>Season</th><th>Revenue Budget</th><th>Pump Budget</th><th>Servicing Budget</th><th>Actions</th></tr></thead><tbody>
+<tr th:each="b:${budgets}"><td th:text="${b.id}"></td><td class="food-name" th:text="${b.zone}"></td><td th:text="${b.season}"></td><td th:text="${'₹' + b.heatingRevenueBudget}"></td><td th:text="${'₹' + b.pumpPowerExpenseBudget}"></td><td th:text="${'₹' + b.servicingExpenseBudget}"></td><td class="actions"><a class="btn btn-small btn-light" th:href="@{'/budgets/edit/' + ${b.id}}">Edit</a><form th:action="@{'/budgets/delete/' + ${b.id}}" method="post" onsubmit="return confirm('Delete this budget?');"><button class="btn btn-small btn-danger" type="submit">Delete</button></form></td></tr>
+<tr th:if="${#lists.isEmpty(budgets)}"><td colspan="7" class="empty">No budgets yet.</td></tr></tbody></table></div></div></div></body></html>

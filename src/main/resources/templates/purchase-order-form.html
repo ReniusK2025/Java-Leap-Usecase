@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title th:text="${pageTitle}">Purchase Order</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<p class="eyebrow">Procure to Pay</p><h1 class="page-heading" th:text="${pageTitle}">Purchase Order</h1><p class="subtitle">The system calculates the purchase order total automatically.</p>
+<div class="form-card"><form th:action="${purchaseOrder.id == null ? '/purchase-orders/save' : '/purchase-orders/update/' + purchaseOrder.id}" method="post"><div class="form-grid">
+<div class="field"><label>Vendor</label><select name="vendorId" required><option value="">Select vendor</option><option th:each="v:${vendors}" th:if="${v.type == 'VENDOR'}" th:value="${v.id}" th:text="${v.id + ' - ' + v.name}" th:selected="${purchaseOrder.vendorId == v.id}"></option></select></div>
+<div class="field"><label>Product</label><select name="productId" required><option value="">Select product</option><option th:each="p:${products}" th:value="${p.id}" th:text="${p.id + ' - ' + p.name}" th:selected="${purchaseOrder.productId == p.id}"></option></select></div>
+<div class="field"><label>Quantity</label><input type="number" name="quantity" min="1" th:value="${purchaseOrder.quantity}" required></div>
+<div class="field"><label>Unit Price (₹)</label><input type="number" step="0.01" name="unitPrice" th:value="${purchaseOrder.unitPrice}" required></div>
+<div class="field" th:if="${purchaseOrder.id != null}"><label>Status</label><select name="status"><option th:selected="${purchaseOrder.status == 'ORDERED'}">ORDERED</option><option th:selected="${purchaseOrder.status == 'RECEIVED'}">RECEIVED</option><option th:selected="${purchaseOrder.status == 'CANCELLED'}">CANCELLED</option></select></div>
+</div><div class="form-actions"><button class="btn btn-primary" type="submit">Save Purchase Order</button><a class="btn btn-light" href="/purchase-orders">Cancel</a></div></form></div></div></body></html>

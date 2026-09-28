@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Payments</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Bank</p><h1 class="page-heading">Payments</h1><p class="subtitle">Record customer receipts and vendor bank payments.</p></div><a class="btn btn-primary" href="/payments/new">＋ Record Payment</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Type</th><th>Reference</th><th>Amount</th><th>Method</th><th>Date</th></tr></thead><tbody>
+<tr th:each="x:${payments}"><td th:text="${x.id}"></td><td th:text="${x.paymentType}"></td><td th:text="${x.referenceId}"></td><td class="price" th:text="'₹' + ${x.amount}"></td><td th:text="${x.method}"></td><td th:text="${x.paymentDate}"></td></tr>
+<tr th:if="${#lists.isEmpty(payments)}"><td colspan="6" class="empty">No payments yet.</td></tr></tbody></table></div></div></div></body></html>

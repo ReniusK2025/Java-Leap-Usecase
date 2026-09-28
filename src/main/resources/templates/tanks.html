@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thermal Tanks</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page"><div th:replace="~{fragments :: navbar}"></div>
+<div class="toolbar"><div><p class="eyebrow">Thermal Storage</p><h1 class="page-heading">Storage Tanks</h1><p class="subtitle">Create, update and manage greenhouse thermal storage tanks.</p></div><a class="btn btn-primary" href="/tanks/new">＋ Add Tank</a></div>
+<div class="card"><div class="table-wrap"><table><thead><tr><th>ID</th><th>Tank</th><th>Zone</th><th>Capacity (L)</th><th>Current °C</th><th>Target °C</th><th>Efficiency</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody><tr th:each="t:${tanks}">
+<td th:text="${t.id}"></td><td class="food-name" th:text="${t.tankCode}"></td><td th:text="${t.zone}"></td><td th:text="${t.capacityLiters}"></td><td th:text="${t.currentTemperatureC}"></td><td th:text="${t.targetTemperatureC}"></td><td th:text="${t.efficiencyPercent + '%'}"></td>
+<td><span class="badge badge-yes" th:if="${t.active}">ACTIVE</span><span class="badge badge-no" th:unless="${t.active}">INACTIVE</span></td>
+<td class="actions"><a class="btn btn-small btn-light" th:href="@{'/tanks/edit/' + ${t.id}}">Edit</a><form th:action="@{'/tanks/delete/' + ${t.id}}" method="post" onsubmit="return confirm('Delete this tank?');"><button class="btn btn-small btn-danger" type="submit">Delete</button></form></td>
+</tr><tr th:if="${#lists.isEmpty(tanks)}"><td colspan="9" class="empty">No tanks yet. Click “Add Tank” to create one.</td></tr></tbody></table></div></div></div></body></html>

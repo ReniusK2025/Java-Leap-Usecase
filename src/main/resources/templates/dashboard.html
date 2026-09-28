@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Greenhouse Energy Dashboard</title><link rel="stylesheet" th:href="@{/css/style.css}"></head>
+<body><div class="page">
+<nav class="navbar"><a class="brand" href="/"><span class="brand-mark">☀️</span><span>GreenHeat ERP</span></a><div class="nav-links"><a href="/">Dashboard</a><a href="/tanks">Tanks</a><a href="/telemetry">Telemetry</a><a href="/masters">Masters</a><a href="/transactions">Transactions</a><a href="/reports">Reports</a></div></nav>
+<section class="hero"><p class="eyebrow">Smart Agricultural Infrastructure</p><h1>Hydro-Thermal Energy Storage</h1><p>Track solar heat collection, water storage, thermal energy delivered, greenhouse billing and accounting from one Spring Boot application.</p></section>
+<section class="stats">
+<div class="stat"><div class="stat-icon">🛢️</div><div class="stat-value" th:text="${dashboard.tankCount}">0</div><div class="stat-label">THERMAL TANKS</div></div>
+<div class="stat"><div class="stat-icon">🔥</div><div class="stat-value" th:text="${dashboard.totalHeatDeliveredKwh} + ' kWh'">0 kWh</div><div class="stat-label">HEAT DELIVERED</div></div>
+<div class="stat"><div class="stat-icon">🧾</div><div class="stat-value" th:text="${dashboard.openVendorBills}">0</div><div class="stat-label">OPEN VENDOR BILLS</div></div>
+</section>
+<h2 class="section-title">Financial Snapshot</h2>
+<section class="stats">
+<div class="stat"><div class="stat-icon">💰</div><div class="stat-value" th:text="'₹' + pnl.heatingRevenue">₹0</div><div class="stat-label">HEATING REVENUE</div></div>
+<div class="stat"><div class="stat-icon">⚡</div><div class="stat-value" th:text="'₹' + pnl.pumpPowerExpenses">₹0</div><div class="stat-label">PUMP POWER EXPENSE</div></div>
+<div class="stat"><div class="stat-icon">📈</div><div class="stat-value" th:text="'₹' + pnl.netProfit">₹0</div><div class="stat-label">NET RESULT</div></div>
+</section>
+
+<h2 class="section-title">Quick Actions</h2>
+<section class="crud-grid">
+<a class="action-card" href="/tanks"><span class="action-icon">🛢️</span><span><h3>Thermal Tanks</h3><p>Create, edit and delete storage tanks.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/telemetry"><span class="action-icon">🌡️</span><span><h3>Telemetry</h3><p>Record sensor readings and calculate kWh.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/contacts"><span class="action-icon">👥</span><span><h3>Contacts</h3><p>Manage growers and equipment vendors.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/products"><span class="action-icon">📦</span><span><h3>Products</h3><p>Manage services and pump assemblies.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/purchase-orders"><span class="action-icon">🧾</span><span><h3>Purchase Orders</h3><p>Order pumps and maintenance goods.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/sales-orders"><span class="action-icon">💼</span><span><h3>Sales Orders</h3><p>Bill growers for thermal heating.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/vendor-bills"><span class="action-icon">🏭</span><span><h3>Vendor Bills</h3><p>Record supplier maintenance bills.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/customer-invoices"><span class="action-icon">🧾</span><span><h3>Customer Invoices</h3><p>Create grower receivables.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/payments"><span class="action-icon">💳</span><span><h3>Payments</h3><p>Record customer and vendor bank payments.</p></span><span class="arrow">→</span></a>
+<a class="action-card" href="/budgets"><span class="action-icon">🎯</span><span><h3>Budgets</h3><p>Create, edit and delete zone budgets.</p></span><span class="arrow">→</span></a>
+</section>
+<div class="footer">Spring Boot · Spring Data JPA · MySQL · Thymeleaf</div></div></body></html>
